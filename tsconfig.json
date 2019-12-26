@@ -6,6 +6,6 @@
     "outDir": "./public/js",
     "baseUrl": "./src"
   },
-  "include": ["src/controllers/"],
+  "include": ["src/p5/"],
   "exclude": ["node_modules"]
 }

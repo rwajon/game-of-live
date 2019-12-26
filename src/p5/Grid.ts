@@ -1,5 +1,10 @@
 class Grid {
-  constructor(cellSize, width, height) {
+  public cellSize: number;
+  public numberOfColumns: number;
+  public numberOfRows: number;
+  public cells: Array<Array<any>>;
+
+  constructor(cellSize: number, width: number, height: number) {
     this.cellSize = cellSize;
     this.numberOfColumns = Math.ceil(width / cellSize);
     this.numberOfRows = height - cellSize;
@@ -7,27 +12,30 @@ class Grid {
       Array(this.numberOfRows),
       () => new Array(this.numberOfColumns),
     );
+
     for (let column = 0; column < this.numberOfColumns; column++) {
       for (let row = 0; row < this.numberOfRows; row++) {
         this.cells[column][row] = new Cell(column, row, cellSize);
       }
     }
   }
-  draw() {
+  public draw() {
     this.cells.forEach(cells => {
       cells.forEach(cell => {
         cell.draw();
       });
     });
   }
-  randomize() {
+
+  public randomize() {
     this.cells.forEach(cells => {
       cells.forEach(cell => {
         cell.setIsAlive(Math.floor(Math.random() * 2));
       });
     });
   }
-  updatePopulation(numberOfGenerations) {
+
+  public updatePopulation(numberOfGenerations: number) {
     let generations = numberOfGenerations;
     this.cells.forEach(cells => {
       cells.forEach(cell => {
@@ -36,24 +44,28 @@ class Grid {
     });
     return { numberOfGenerations: generations };
   }
-  getNeighbors(currentCell) {
+
+  public getNeighbors(currentCell: any) {
     let neighbors = [];
     for (let xOffset = -1; xOffset <= 1; xOffset++) {
       for (let yOffset = -1; yOffset <= 1; yOffset++) {
         let neighborColumn = currentCell.column + xOffset;
         let neighborRow = currentCell.row + yOffset;
+
         if (this.isValidPosition(neighborColumn, neighborRow)) {
           let neighborCell = this.cells[neighborColumn][neighborRow];
           neighbors.push(neighborCell);
         }
       }
     }
+
     return neighbors.filter(
       ({ row, column }) =>
         row !== currentCell.row || column !== currentCell.column,
     );
   }
-  isValidPosition(column, row) {
+
+  public isValidPosition(column: number, row: number) {
     if (
       column >= 0 &&
       column < this.numberOfColumns &&
@@ -64,7 +76,8 @@ class Grid {
     }
     return false;
   }
-  updateNeighborCounts() {
+
+  public updateNeighborCounts() {
     this.cells.forEach(cells => {
       cells.forEach(cell => {
         cell.liveNeighborCount = 0;
@@ -77,15 +90,16 @@ class Grid {
       });
     });
   }
-  stop() {
+
+  public stop() {
     this.cells.forEach(cells => {
       cells.forEach(cell => {
         cell.setIsAlive(false);
       });
     });
   }
-  replay() {
+
+  public replay() {
     this.randomize();
   }
 }
-//# sourceMappingURL=Grid.js.map
