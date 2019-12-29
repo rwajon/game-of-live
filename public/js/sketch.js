@@ -8,6 +8,8 @@ function setup() {
   window.frameRate(frameRate);
   let cnv = window.createCanvas(width, height);
   cnv.parent(document.querySelector('#grids'));
+  document.querySelector('canvas').style.width = '95%';
+  document.querySelector('canvas').style.height = '95%';
   grid = new Grid(cellSize, width, height);
   grid.randomize();
 }
