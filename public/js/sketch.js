@@ -2,13 +2,13 @@
 let grid;
 let isPaused = false;
 let frameRate = 5;
-const [width, height] = [500, 500];
+let [cellSize, width, height] = [25, 500, 500];
 
 function setup() {
   window.frameRate(frameRate);
   let cnv = window.createCanvas(width, height);
   cnv.parent(document.querySelector('#grids'));
-  grid = new Grid(20, width, height);
+  grid = new Grid(cellSize, width, height);
   grid.randomize();
 }
 
@@ -17,7 +17,6 @@ function draw() {
   grid.updateNeighborCounts();
   grid.updatePopulation();
   grid.draw();
-  grid.countLivingCells();
 }
 
 function pause() {
@@ -33,6 +32,17 @@ function pause() {
   return isPaused;
 }
 
+function onInputChange({ name, value }) {
+  if (name === 'width') {
+    width = value;
+  } else if (name === 'height') {
+    height = value;
+  } else if (name === 'cellSize') {
+    cellSize = value;
+  }
+  return { name, value };
+}
+
 function stop() {
   grid.stop();
 }
@@ -44,9 +54,23 @@ function replay() {
 function forward() {
   frameRate += 5;
   window.frameRate(frameRate);
+  document.querySelector('#frame-rate').innerHTML = frameRate;
 }
 
 function backward() {
   frameRate = frameRate > 5 ? frameRate - 5 : 5;
   window.frameRate(frameRate);
+  document.querySelector('#frame-rate').innerHTML = frameRate;
 }
+
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelector('#frame-rate').innerHTML = frameRate;
+  document.querySelector('form').cellSize.value = cellSize;
+  document.querySelector('form').width.value = width;
+  document.querySelector('form').height.value = height;
+
+  document.querySelector('form[name="canvas-setup"]').onsubmit = e => {
+    setup();
+    return false;
+  };
+});

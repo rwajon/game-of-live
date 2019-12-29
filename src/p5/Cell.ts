@@ -12,7 +12,7 @@ class Cell {
   public isAlive: boolean;
   public liveNeighborCount: number;
 
-  constructor(column, row, size) {
+  constructor(column: number, row: number, size: number) {
     this.column = column;
     this.row = row;
     this.size = size;
@@ -36,8 +36,8 @@ class Cell {
     );
   }
 
-  setIsAlive(value) {
-    this.isAlive = value;
+  setIsAlive(value: number) {
+    this.isAlive = !!value;
   }
 
   liveOrDie() {

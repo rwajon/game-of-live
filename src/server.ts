@@ -3,15 +3,9 @@ import App from './app';
 import * as bodyParser from 'body-parser';
 import loggerMiddleware from './middlewares/logger';
 
-// import PostsController from './controllers/posts/posts.controller'
-// import HomeController from './controllers/home/home.controller'
-
 const app = new App({
   port: 5000,
-  controllers: [
-    // new HomeController(),
-    // new PostsController()
-  ],
+  controllers: [],
   middleWares: [
     bodyParser.json(),
     bodyParser.urlencoded({ extended: true }),

@@ -11,29 +11,59 @@
   </head>
 
   <body>
-    <div class="container text-center">
+    <div class="container">
       <h1>
         Game Of Life
       </h1>
       <hr />
-      <div id="grids" class="well"></div>
-      <hr />
-      <div>
-        <button class="btn btn-primary" onclick="backward()">
-          <span class="fa fa-backward"></span> Slow motion
-        </button>
-        <button class="btn btn-warning play-pause-btn" onclick="pause()">
-          <span class="fa fa-pause"></span> Pause
-        </button>
-        <button class="btn btn-danger" onclick="stop()">
-          <span class="fa fa-stop"></span> Stop
-        </button>
-        <button class="btn btn-success" onclick="replay()">
-          <span class="fa fa-refresh"></span> Replay
-        </button>
-        <button class="btn btn-primary" onclick="forward()">
-          Fast motion <span class="fa fa-forward"></span>
-        </button>
+      <div class="row">
+        <div id="grids" class="col-xs-12 col-md-7"></div>
+        <div class="col-xs-12 col-md-5">
+          <form name="canvas-setup">
+            <div class="row">
+              <div class="col-xs-12 col-sm-6">
+                <input class="form-control" type="number" min="1" name="width" placeholder="width"
+                  onkeyup="onInputChange(this)" />
+              </div>
+              <div class="col-xs-12 col-sm-6">
+                <input class="form-control" type="number" min="1" name="height" placeholder="height"
+                  onkeyup="onInputChange(this)" />
+              </div>
+            </div>
+            <br />
+            <div class="row">
+              <div class="col-xs-12 col-sm-6">
+                <input class="form-control" type="number" min="1" name="cellSize" placeholder="cell size"
+                  onkeyup="onInputChange(this)" />
+              </div>
+              <div class="col-xs-12 col-sm-6">
+                <button type="submit" class="btn btn-success">Go</button>
+              </div>
+            </div>
+          </form>
+          <hr />
+          <h4>
+            Frame Rate:<span class="badge" id="frame-rate"></span>
+          </h4>
+          <hr />
+          <div>
+            <button class="btn btn-primary" onclick="backward()">
+              <span class="fa fa-backward"></span>
+            </button>
+            <button class="btn btn-warning play-pause-btn" onclick="pause()">
+              <span class="fa fa-pause"></span> Pause
+            </button>
+            <button class="btn btn-danger" onclick="stop()">
+              <span class="fa fa-stop"></span> Stop
+            </button>
+            <button class="btn btn-success" onclick="replay()">
+              <span class="fa fa-refresh"></span> Replay
+            </button>
+            <button class="btn btn-primary" onclick="forward()">
+              <span class="fa fa-forward"></span>
+            </button>
+          </div>
+        </div>
       </div>
     </div>
     <!-- scripts -->
